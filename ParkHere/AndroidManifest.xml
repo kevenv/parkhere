@@ -20,13 +20,17 @@
         <activity
             android:name="com.parkhere.SplashScreen"
             android:label="@string/title_activity_splash_screen"
-            android:screenOrientation="portrait" 
+            android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Black.NoTitleBar" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity
+            android:name="com.parkhere.ChooseActivity"
+            android:label="@string/title_activity_choose" >
         </activity>
     </application>
 
