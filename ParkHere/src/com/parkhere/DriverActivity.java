@@ -116,7 +116,7 @@ public class DriverActivity extends Fragment implements LocationListener, IConsu
 	private void setCurrentLocationMarker() {
 		if(currentPosition != null) {
 	        map.addMarker(new MarkerOptions()
-	        .icon(BitmapDescriptorFactory.fromResource(R.drawable.pinme))
+	        .icon(BitmapDescriptorFactory.fromResource(R.drawable.smallmepin))
 	        .title("Your current Location")
 	        .position(currentPosition));
 		}
