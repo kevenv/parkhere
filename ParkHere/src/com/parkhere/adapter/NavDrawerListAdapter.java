@@ -5,8 +5,6 @@ import java.util.ArrayList;
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.drawable.ColorDrawable;
-import android.graphics.drawable.GradientDrawable;
-import android.graphics.drawable.GradientDrawable.Orientation;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -45,10 +43,10 @@ public class NavDrawerListAdapter extends BaseAdapter {
 
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
-		
 		if (convertView == null) {
             LayoutInflater mInflater = (LayoutInflater)
                     context.getSystemService(Activity.LAYOUT_INFLATER_SERVICE);
+
 
     		if(position == 0 ){
                 convertView = mInflater.inflate(R.layout.drawer_list_item_first, null);
@@ -95,6 +93,7 @@ public class NavDrawerListAdapter extends BaseAdapter {
 			
 
 		}
+
         return convertView;
 	}
 
