@@ -1,6 +1,11 @@
 package com.parkhere;
 
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
 
 import android.os.Bundle;
 import android.os.CountDownTimer;
@@ -52,6 +57,7 @@ public class TimerActivity extends Fragment {
         
         payForTheSpot.setOnClickListener(new OnClickListener() {
 			public void onClick(View v) {
+				getFragmentManager().beginTransaction().replace(R.id.frame_container, new ChooseActivity()).addToBackStack( "choose" ).commit();
 			}
 		});
         return rootView;
@@ -66,6 +72,17 @@ public class TimerActivity extends Fragment {
 	        fragment = SupportMapFragment.newInstance();
 	        fm.beginTransaction().replace(R.id.mapTimer, fragment).commit();
 	    }
+	}
+	
+	@Override
+	public void onResume() {
+		super.onResume();
+        LatLng position = new LatLng(45.504092,-73.619416);
+        GoogleMap map = fragment.getMap();
+        map.addMarker(new MarkerOptions()
+        .icon(BitmapDescriptorFactory.fromResource(R.drawable.pinsmall))
+        .position(position));
+		map.moveCamera(CameraUpdateFactory.newLatLngZoom(position, 16));
 	}
 	
 	public void onDestroyView() {

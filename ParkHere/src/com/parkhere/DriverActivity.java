@@ -112,11 +112,14 @@ public class DriverActivity extends Fragment implements LocationListener, IConsu
         map.moveCamera(CameraUpdateFactory.newLatLngZoom(currentPosition, 16));
         locationManager.removeUpdates(this);
 	}
+	
 	private void setCurrentLocationMarker() {
-        map.addMarker(new MarkerOptions()
-        .icon(BitmapDescriptorFactory.fromResource(R.drawable.pinme))
-        .title("Your current Location")
-        .position(currentPosition));
+		if(currentPosition != null) {
+	        map.addMarker(new MarkerOptions()
+	        .icon(BitmapDescriptorFactory.fromResource(R.drawable.pinme))
+	        .title("Your current Location")
+	        .position(currentPosition));
+		}
 	}
 
 
@@ -210,17 +213,15 @@ public class DriverActivity extends Fragment implements LocationListener, IConsu
 			}
 		});
 		
-        //map.setMyLocationEnabled(true);
-        Criteria criteria = new Criteria();
         locationManager = (LocationManager) getActivity().getSystemService(Activity.LOCATION_SERVICE);
-        provider = locationManager.getBestProvider(criteria, true);
+        provider = LocationManager.GPS_PROVIDER;
         
         Location lastKnownLocation = locationManager.getLastKnownLocation(provider);
         
         if(lastKnownLocation!=null){
             onLocationChanged(lastKnownLocation);
         }
-        locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 10, 1, this);
+        locationManager.requestLocationUpdates(provider, 0, 1, this);
 
         LatLng position = new LatLng(45.504092,-73.619416);
         map.moveCamera(CameraUpdateFactory.newLatLngZoom(position, 16));
