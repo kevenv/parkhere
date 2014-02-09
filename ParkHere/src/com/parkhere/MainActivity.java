@@ -39,10 +39,6 @@ public class MainActivity extends FragmentActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 
-		/*Intent i = new Intent(MainActivity.this, ChooseActivity.class);
-        startActivity(i);
-        finish();*/
-
 		// load slide menu items
 		navMenuTitles = getResources().getStringArray(R.array.nav_drawer_items);
 
@@ -98,6 +94,8 @@ public class MainActivity extends FragmentActivity {
 		getActionBar().setDisplayShowTitleEnabled(false);
 		getActionBar().setDisplayShowHomeEnabled(true);
 		getActionBar().setDisplayHomeAsUpEnabled(false);
+		
+		getFragmentManager().beginTransaction().replace(R.id.frame_container, new ChooseActivity()).commit();
 	}
 
 
