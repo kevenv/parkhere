@@ -2,10 +2,12 @@ package com.parkhere;
 
 import java.util.List;
 
-import android.app.Fragment;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.util.Base64;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,6 +19,7 @@ import android.widget.TextView;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapFragment;
+import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
@@ -29,7 +32,7 @@ public class ParkingSpotActivity extends Fragment implements IConsumeParkingLots
 	private GoogleMap map;
 	private View rootView;
 	private String objectId;
-	private MapFragment fm;
+	private SupportMapFragment fragment;
     
 	public void setObjectId(String objectId) {
 		this.objectId = objectId;
@@ -39,21 +42,8 @@ public class ParkingSpotActivity extends Fragment implements IConsumeParkingLots
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		rootView = inflater.inflate(R.layout.activity_parkingspot, container, false);
-		
-		ParseConnector parseConnector = new ParseConnector(getActivity().getApplicationContext());
-		parseConnector.getParkingLocationById(this, objectId);
-		
-		ImageView bookItButton = (ImageView) rootView.findViewById(R.id.bookItButton);
-		bookItButton.setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				getFragmentManager().beginTransaction().remove(ParkingSpotActivity.this).commit();
-			}
-		});
 		return rootView;
 	}
-
-
 
 	@Override
 	public void onReceiveParkingLots(List<ParkingLot> parkingLots) {
@@ -80,17 +70,53 @@ public class ParkingSpotActivity extends Fragment implements IConsumeParkingLots
 		Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length); 
 		picture.setImageBitmap(decodedByte);
 		
-		fm = (MapFragment)  getFragmentManager().findFragmentById(R.id.map_detail);
-		map = fm.getMap();
-		map.getUiSettings().setZoomControlsEnabled(false);
-		map.getUiSettings().setZoomGesturesEnabled(false);
-		
 		LatLng position = new LatLng(parkingLot.getLatitude(),parkingLot.getLongitude());
         map.addMarker(new MarkerOptions()
                 .icon(BitmapDescriptorFactory.fromResource(R.drawable.pin))
                 .title(parkingLot.getName())
                 .position(position));
         map.moveCamera(CameraUpdateFactory.newLatLngZoom(position, 16));
+	}
+	
+	@Override
+	public void onActivityCreated(Bundle savedInstanceState) {
+	    super.onActivityCreated(savedInstanceState);
+		FragmentManager fm = getChildFragmentManager();
+	    fragment = (SupportMapFragment) fm.findFragmentById(R.id.map_detail);
+	    if (fragment == null) {
+	        fragment = SupportMapFragment.newInstance();
+	        fm.beginTransaction().replace(R.id.map_detail, fragment).commit();
+	    }
+	}
+	
+	@Override
+	public void onResume() {
+	    super.onResume();
+	    if (map == null) {
+	        map = fragment.getMap();
+	    }
+		map.getUiSettings().setZoomControlsEnabled(false);
+		map.getUiSettings().setZoomGesturesEnabled(false);
+	    
+		ParseConnector parseConnector = new ParseConnector(getActivity().getApplicationContext());
+		parseConnector.getParkingLocationById(this, objectId);
+		
+		ImageView bookItButton = (ImageView) rootView.findViewById(R.id.bookItButton);
+		bookItButton.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				getFragmentManager().beginTransaction()
+				.remove(fragment)
+				.replace(R.id.frame_container, new TimerActivity()).commit();
+			}
+		});
+	}
+	
+	public void onDestroyView() {
+	   super.onDestroyView();   
+	   FragmentTransaction ft = getFragmentManager().beginTransaction();
+	   ft.remove(fragment);
+	   ft.commit();
 	}
 
 }

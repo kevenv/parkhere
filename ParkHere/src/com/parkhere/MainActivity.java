@@ -3,13 +3,12 @@ package com.parkhere;
 import java.util.ArrayList;
 
 import android.app.ActionBar;
-import android.app.Activity;
-import android.app.Fragment;
-import android.app.FragmentManager;
 import android.content.Context;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.widget.DrawerLayout;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -20,13 +19,12 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ImageView;
 import android.widget.ListView;
 
-import com.google.android.gms.internal.ac;
 import com.parkhere.adapter.NavDrawerListAdapter;
 import com.parkhere.model.NavDrawerItem;
 
 
 
-public class MainActivity extends Activity {
+public class MainActivity extends FragmentActivity {
 	private DrawerLayout mDrawerLayout;
 	private ListView mDrawerList;
 	private ActionBarDrawerToggle mDrawerToggle;
@@ -114,7 +112,7 @@ public class MainActivity extends Activity {
         // Set the drawer toggle as the DrawerListener
         mDrawerLayout.setDrawerListener(mDrawerToggle);
 		
-		getFragmentManager().beginTransaction().replace(R.id.frame_container, new ChooseActivity()).addToBackStack( "choose" ).commit();
+		getSupportFragmentManager().beginTransaction().replace(R.id.frame_container, new ChooseActivity()).addToBackStack( "choose" ).commit();
 	}
 
     @Override
@@ -160,9 +158,9 @@ public class MainActivity extends Activity {
 		}
 
 		if (fragment != null) {
-			FragmentManager fragmentManager =	getFragmentManager();
+			FragmentManager fragmentManager = getSupportFragmentManager();
 			fragmentManager.beginTransaction()
-					.replace(R.id.frame_container, fragment).addToBackStack( "choose2" ).commit();
+					.replace(R.id.frame_container, fragment).addToBackStack( "choose" ).commit();
 
 			// update selected item and title, then close the drawer
 			mDrawerList.setItemChecked(position, true);

@@ -3,12 +3,14 @@ package com.parkhere;
 import java.util.List;
 
 import android.app.Activity;
-import android.app.Fragment;
 import android.location.Criteria;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -23,7 +25,7 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.GoogleMap.InfoWindowAdapter;
 import com.google.android.gms.maps.GoogleMap.OnInfoWindowClickListener;
-import com.google.android.gms.maps.MapFragment;
+import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
@@ -40,7 +42,7 @@ public class DriverActivity extends Fragment implements LocationListener, IConsu
 	private ParseConnector parseConnector;
 	private LatLng currentPosition;
 	private View rootView;
-	private MapFragment fm;
+	private SupportMapFragment fragment;
 
 
 	@Override
@@ -48,64 +50,6 @@ public class DriverActivity extends Fragment implements LocationListener, IConsu
 			Bundle savedInstanceState) {
 		rootView = inflater.inflate(R.layout.activity_driver, container, false);
 		
-		// Get a handle to the Map Fragment
-		fm = (MapFragment)  getFragmentManager().findFragmentById(R.id.map);
-		map = fm.getMap(); 
-        map.getUiSettings().setZoomControlsEnabled(false);
-		
-		map.setInfoWindowAdapter(new InfoWindowAdapter() {
-			@Override
-			public View getInfoWindow(Marker marker) {
-				ParkingLot parkingLot = ParkingLot.fromJson(marker.getSnippet());
-			    View v = getActivity().getLayoutInflater().inflate(R.layout.custom_info_window, null);
-			    TextView description = (TextView) v.findViewById(R.id.description);
-			    description.setText(parkingLot.getName());
-			    
-			    TextView title = (TextView) v.findViewById(R.id.title);
-			    title.setText(parkingLot.getAddress());
-			    
-			    TextView snippet = (TextView) v.findViewById(R.id.price);
-			    snippet.setText("Price/Day: " +parkingLot.getPricePerDay() +"$");
-
-			    return v;
-			}
-			
-			@Override
-			public View getInfoContents(Marker arg0) {
-				return null;
-			}
-		});
-		
-		map.setOnInfoWindowClickListener(new OnInfoWindowClickListener() {
-			@Override
-			public void onInfoWindowClick(Marker marker) {
-				ParkingSpotActivity parkingSpotActivity = new ParkingSpotActivity();
-				parkingSpotActivity.setObjectId(marker.getTitle());
-				getFragmentManager().beginTransaction()
-				.remove(fm)
-				.replace(R.id.frame_container, parkingSpotActivity).addToBackStack("post").commit();
-			}
-		});
-		
-        //map.setMyLocationEnabled(true);
-        Criteria criteria = new Criteria();
-        locationManager = (LocationManager) getActivity().getSystemService(Activity.LOCATION_SERVICE);
-        provider = locationManager.getBestProvider(criteria, true);
-        
-        Location lastKnownLocation = locationManager.getLastKnownLocation(provider);
-        
-        if(lastKnownLocation!=null){
-            onLocationChanged(lastKnownLocation);
-        }
-        locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 10, 1, this);
-
-        LatLng position = new LatLng(45.504092,-73.619416);
-        map.moveCamera(CameraUpdateFactory.newLatLngZoom(position, 16));
-        manageShowPanel();
-        manageShowAvailability();
-        
-        parseConnector = new ParseConnector(getActivity().getApplicationContext());
-        parseConnector.getParkingLocations(this, null);
 		return rootView;
 	}
 	
@@ -207,6 +151,91 @@ public class DriverActivity extends Fragment implements LocationListener, IConsu
 	                .snippet(parkingLot.toJson())
 	                .position(position));
 		}
+	}
+	
+	@Override
+	public void onActivityCreated(Bundle savedInstanceState) {
+	    super.onActivityCreated(savedInstanceState);
+	    FragmentManager manager = getChildFragmentManager();
+	    fragment = (SupportMapFragment) manager.findFragmentById(R.id.map);
+	    if (fragment == null) {
+	        fragment = SupportMapFragment.newInstance();
+	        manager.beginTransaction().replace(R.id.map, fragment).commit();
+	    }
+	}
+	
+	@Override
+	public void onResume() {
+	    super.onResume();
+	    if (map == null) {
+	        map = fragment.getMap();
+	    }
+	    // Get a handle to the Map Fragment
+        map.getUiSettings().setZoomControlsEnabled(false);
+		
+		map.setInfoWindowAdapter(new InfoWindowAdapter() {
+			@Override
+			public View getInfoWindow(Marker marker) {
+			    View v = getActivity().getLayoutInflater().inflate(R.layout.custom_info_window, null);
+				if(marker.getSnippet() == null) {
+					return v;
+				}
+				ParkingLot parkingLot = ParkingLot.fromJson(marker.getSnippet());
+			    TextView description = (TextView) v.findViewById(R.id.description);
+			    description.setText(parkingLot.getName());
+			    
+			    TextView title = (TextView) v.findViewById(R.id.title);
+			    title.setText(parkingLot.getAddress());
+			    
+			    TextView snippet = (TextView) v.findViewById(R.id.price);
+			    snippet.setText("Price/Day: " +parkingLot.getPricePerDay() +"$");
+
+			    return v;
+			}
+			
+			@Override
+			public View getInfoContents(Marker arg0) {
+				return null;
+			}
+		});
+		
+		map.setOnInfoWindowClickListener(new OnInfoWindowClickListener() {
+			@Override
+			public void onInfoWindowClick(Marker marker) {
+				ParkingSpotActivity parkingSpotActivity = new ParkingSpotActivity();
+				parkingSpotActivity.setObjectId(marker.getTitle());
+				getFragmentManager().beginTransaction()
+				.remove(fragment)
+				.replace(R.id.frame_container, parkingSpotActivity).addToBackStack("post").commit();
+			}
+		});
+		
+        //map.setMyLocationEnabled(true);
+        Criteria criteria = new Criteria();
+        locationManager = (LocationManager) getActivity().getSystemService(Activity.LOCATION_SERVICE);
+        provider = locationManager.getBestProvider(criteria, true);
+        
+        Location lastKnownLocation = locationManager.getLastKnownLocation(provider);
+        
+        if(lastKnownLocation!=null){
+            onLocationChanged(lastKnownLocation);
+        }
+        locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 10, 1, this);
+
+        LatLng position = new LatLng(45.504092,-73.619416);
+        map.moveCamera(CameraUpdateFactory.newLatLngZoom(position, 16));
+        manageShowPanel();
+        manageShowAvailability();
+        
+        parseConnector = new ParseConnector(getActivity().getApplicationContext());
+        parseConnector.getParkingLocations(this, null);
+	}
+	
+	public void onDestroyView() {
+	   super.onDestroyView();   
+	   FragmentTransaction ft = getFragmentManager().beginTransaction();
+	   ft.remove(fragment);
+	   ft.commit();
 	}
 
 }

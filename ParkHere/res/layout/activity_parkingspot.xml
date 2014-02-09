@@ -28,11 +28,11 @@
 	   	      android:textColor="#65B2E9"
 	   	      android:textSize="16pt" />
 	   	  
-	   	  <fragment
-			 android:id="@+id/map_detail"
-			 android:layout_width="668px"
-			 android:layout_height="450px"
-			 class="com.google.android.gms.maps.MapFragment"/>
+		<RelativeLayout
+	        android:id="@+id/map_detail"
+	        android:layout_width="668px"
+			android:layout_height="450px">
+	    </RelativeLayout>	   	  
 	   	  
 	   	  <TextView 
 	        android:layout_width="wrap_content"
