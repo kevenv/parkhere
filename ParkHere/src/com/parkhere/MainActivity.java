@@ -1,25 +1,14 @@
 package com.parkhere;
 
-import java.util.List;
-
-import com.parse.FindCallback;
-import com.parse.Parse;
-import com.parse.ParseException;
-import com.parse.ParseObject;
-import com.parse.ParseQuery;
-
-import android.os.Bundle;
-import android.app.Activity;
-import android.content.Intent;
-
 import java.util.ArrayList;
 
-import android.app.ActionBar;
 import android.app.Activity;
+import android.app.Fragment;
+import android.app.FragmentManager;
 import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.widget.DrawerLayout;
-
+import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.widget.AdapterView;
@@ -147,7 +136,31 @@ public class MainActivity extends Activity {
 	 * Diplaying fragment view for selected nav drawer list item
 	 * */
 	private void displayView(int position) {
-	}
-	
+		Fragment fragment = null;
+		switch (position) {
+		case 0:
+			fragment = new ChooseActivity();
+			break;
 
+		default:
+			break;
+		}
+
+		if (fragment != null) {
+			FragmentManager fragmentManager = getFragmentManager();
+			fragmentManager.beginTransaction()
+					.replace(R.id.frame_container, fragment).commit();
+
+			// update selected item and title, then close the drawer
+			mDrawerList.setItemChecked(position, true);
+			mDrawerList.setSelection(position);
+		//	setTitle(navMenuTitles[position]);
+			mDrawerLayout.closeDrawer(mDrawerList);
+		} else {
+			// error in creating fragment
+			Log.e("MainActivity", "Error in creating fragment");
+		}
+
+	
+	}
 }

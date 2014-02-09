@@ -1,16 +1,15 @@
 package com.parkhere;
 
+import android.app.Fragment;
 import android.os.Bundle;
-import android.app.Activity;
-import android.content.Intent;
-import android.view.Menu;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.Button;
+import android.view.ViewGroup;
 import android.widget.ImageView;
 
-public class ChooseActivity extends Activity {
-
+public class ChooseActivity extends Fragment {
+/*
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -30,5 +29,21 @@ public class ChooseActivity extends Activity {
 		getMenuInflater().inflate(R.menu.choose, menu);
 		return true;
 	}
-
+*/
+	
+	@Override
+	public View onCreateView(LayoutInflater inflater, ViewGroup container,
+			Bundle savedInstanceState) {
+        View rootView = inflater.inflate(R.layout.activity_choose, container, false);
+        	/*
+		ImageView img = (ImageView) container.findViewById(R.id.imageView1);
+        
+		img.setOnClickListener(new OnClickListener() {
+		    public void onClick(View v) {
+		    	//TODO:
+		    }
+		});
+		*/
+        return rootView;
+	}
 }

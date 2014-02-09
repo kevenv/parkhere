@@ -29,12 +29,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name="com.parkhere.ChooseActivity"
-            android:label="@string/title_activity_choose"
-            android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.Black.NoTitleBar" >
-        </activity>
     </application>
 
 </manifest>
