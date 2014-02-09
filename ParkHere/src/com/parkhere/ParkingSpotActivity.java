@@ -60,7 +60,7 @@ public class ParkingSpotActivity extends Fragment implements IConsumeParkingLots
 		availability.setText(parkingLot.getRentTerm());
 		
 		TextView price = (TextView)rootView.findViewById(R.id.price);
-		price.setText(parkingLot.getPricePerDay() +" Dollars/day");
+		price.setText(parkingLot.getPricePerDay() +" $/day");
 		
 		TextView detail = (TextView)rootView.findViewById(R.id.details);
 		detail.setText(parkingLot.getDetail());

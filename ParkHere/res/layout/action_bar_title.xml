@@ -7,7 +7,7 @@
 	
     <ImageView 
         android:id="@+id/burgerIcon"
-        android:layout_marginLeft="-90px"
+        android:layout_marginLeft="-80px"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
 </RelativeLayout>

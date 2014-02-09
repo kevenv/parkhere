@@ -7,49 +7,151 @@
     android:paddingRight="0dp"
     android:paddingTop="0dp"
     tools:context=".TimerActivity" >
-    
-    <ImageView
-        android:id="@+id/imageView1"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:layout_width="768px"
-        android:layout_height="200px"
-        android:layout_marginTop="0dp"
-        android:layout_marginLeft="0dp"
-        android:src="@drawable/baneer" />
-    
-    <TextView
-        android:id="@+id/textOfTimer"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:layout_width="200px"
-        android:layout_height="60px"
-        android:layout_marginTop="100px"
-        android:layout_marginLeft="260px"
-        android:textColor="#65B2E9"
-        android:textSize="11pt"/>
-    
 
- 
-	<RelativeLayout
-     android:id="@+id/mapTimer"
-	 android:layout_alignParentLeft="true"
-     android:layout_alignParentTop="true"
-     android:layout_width="768px"
-     android:layout_height="840px"
-     android:layout_marginTop="200px"
-     android:layout_marginLeft="0dp">
-    </RelativeLayout>	   	  
-    
-    
-      <ImageView
-        android:id="@+id/payForTheSpot"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:layout_width="543px"
-        android:layout_height="117px"
-        android:layout_marginTop="420dp"
-        android:layout_marginLeft="113px"
-        android:src="@drawable/payforthespot" />
-    
+        <RelativeLayout
+            android:id="@+id/mapTimer"
+            android:layout_width="768px"
+            android:layout_height="1040px"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginLeft="0dp"
+            android:layout_marginTop="0px" >
+        </RelativeLayout>
+
+                <ImageView
+            android:id="@+id/imageView1"
+            android:layout_width="768px"
+            android:layout_height="200px"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginLeft="0dp"
+            android:layout_marginTop="0dp"
+            android:src="@drawable/baneer" />
+
+        <TextView
+            android:id="@+id/textOfTimer"
+            android:layout_width="200px"
+            android:layout_height="60px"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginLeft="260px"
+            android:layout_marginTop="100px"
+            android:textColor="#65B2E9"
+            android:textSize="11pt" />
+        
+        <ImageView
+            android:id="@+id/payForTheSpot"
+            android:layout_width="543px"
+            android:layout_height="117px"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginLeft="113px"
+            android:layout_marginTop="420dp"
+            android:src="@drawable/payforthespot" />
+            
+            <RelativeLayout
+                android:id="@+id/paymentForm"
+                android:layout_width="543px"
+                android:layout_height="480px"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginLeft="117px"
+                android:layout_marginTop="200px"
+                android:background="#65B2E9"
+                android:visibility="invisible" >
+                
+              <TextView
+	   	      android:id="@+id/title"
+	   	      android:layout_width="443px"
+              android:layout_height="60px"
+              android:layout_alignParentLeft="true"
+              android:layout_alignParentTop="true"
+              android:layout_marginLeft="90px"
+              android:layout_marginTop="50px"
+	   	      android:fontFamily="droid-sans"
+	   	      android:textColor="@color/white"
+	   	      android:text="Pay for the Spot"
+	   	      android:textSize="11pt" />
+                
+                <EditText
+                android:id="@+id/emailAdress"
+                android:layout_width="443px"
+                android:layout_height="60px"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginLeft="50px"
+                android:layout_marginTop="150px"
+                android:hint="Email"
+                android:padding="10px"
+                android:textColor="#65B2E9"
+                android:text="greg@parkhere.com"
+                android:background="@color/white"/>
+                
+                
+                <EditText
+                android:id="@+id/cardNumber"
+                android:layout_width="443px"
+                android:layout_height="60px"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginLeft="50px"
+                android:layout_marginTop="260px"
+                android:hint="Card Number"
+                android:padding="10px"
+                android:textColor="#65B2E9"
+                android:text="4242 4242 4242 4242"
+                android:background="@color/white"/>
+                
+
+                <EditText
+                android:id="@+id/monthYear"
+                android:layout_width="200px"
+                android:layout_height="60px"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginLeft="50px"
+                android:layout_marginTop="360px"
+                android:hint="MM/YY"
+                android:padding="10px"
+                android:textColor="#65B2E9"
+                android:text="07/14"
+                android:background="@color/white"/>
+                
+                <EditText
+                android:id="@+id/cvc"
+                android:layout_width="200px"
+                android:layout_height="60px"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginLeft="293px"
+                android:layout_marginTop="360px"
+                android:hint="CVC"
+                android:padding="10px"
+                android:textColor="#65B2E9"
+                android:text="509"
+                android:password="true"
+                android:background="@color/white"/>
+            </RelativeLayout>
+                
+                <ImageView
+	            android:id="@+id/signupId"
+	            android:layout_width="543px"
+	            android:layout_height="100px"
+	            android:layout_alignParentLeft="true"
+	            android:layout_alignParentTop="true"
+	            android:layout_marginLeft="117px"
+	            android:layout_marginTop="678px"
+	            android:src="@drawable/signup"
+	            android:visibility="invisible" />
+                
+                <ImageView
+	            android:id="@+id/justPayId"
+	            android:layout_width="543px"
+	            android:layout_height="100px"
+	            android:layout_alignParentLeft="true"
+	            android:layout_alignParentTop="true"
+	            android:layout_marginLeft="117px"
+	            android:layout_marginTop="800px"
+	            android:src="@drawable/justpay"
+	            android:visibility="invisible" />
 </RelativeLayout>

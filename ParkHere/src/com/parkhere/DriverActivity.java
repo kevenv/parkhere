@@ -191,7 +191,7 @@ public class DriverActivity extends Fragment implements LocationListener, IConsu
 			    title.setText(parkingLot.getAddress());
 			    
 			    TextView snippet = (TextView) v.findViewById(R.id.price);
-			    snippet.setText("Price/Day: " +parkingLot.getPricePerDay() +"$");
+			    snippet.setText("Price/Day: " +String.format("%.2f", parkingLot.getPricePerDay()) +"$");
 
 			    return v;
 			}

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="768px"
+			    android:layout_height="1184px"
+			    android:paddingBottom="0dp"
+			    android:paddingLeft="0dp"
+			    android:paddingRight="0dp"
+			    android:paddingTop="0dp">
+
+
+ </RelativeLayout>
