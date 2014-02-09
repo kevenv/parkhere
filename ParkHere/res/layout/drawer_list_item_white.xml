@@ -2,31 +2,28 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/menu_white"
     android:layout_width="220dp"
-    android:layout_height="40dp"
+    android:layout_height="match_parent"
     android:background="@color/white"
    >
     <ImageView
         android:id="@+id/icon"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="false"
-        android:layout_marginLeft="0dp"
-        android:layout_marginRight="0dp"
-        android:layout_centerVertical="false" />
+        android:layout_height="wrap_content" />
 
    <TextView
         android:id="@+id/title"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:minHeight="?android:attr/listPreferredItemHeightSmall"
-        android:textAppearance="?android:attr/textAppearanceListItemSmall"
+
         android:textColor="@color/menu_background"
         android:gravity="center_vertical"
         android:fontFamily="Helvetica"
         android:textStyle="bold"
-        android:layout_marginLeft="0dp"
+        
+
         android:textSize="18dp"
         android:layout_toRightOf="@id/icon"
+        
         android:paddingRight="40dp"/>
     
     
