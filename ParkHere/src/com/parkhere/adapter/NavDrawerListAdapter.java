@@ -4,12 +4,15 @@ import java.util.ArrayList;
 
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.GradientDrawable;
+import android.graphics.drawable.GradientDrawable.Orientation;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import com.parkhere.R;
@@ -47,18 +50,46 @@ public class NavDrawerListAdapter extends BaseAdapter {
             LayoutInflater mInflater = (LayoutInflater)
                     context.getSystemService(Activity.LAYOUT_INFLATER_SERVICE);
 
+    		if(position == 0 ){
+                convertView = mInflater.inflate(R.layout.drawer_list_item_first, null);
+    			ImageView imgIcon = (ImageView) convertView.findViewById(R.id.icon);
+    			imgIcon.setImageResource(navDrawerItems.get(position).getIcon());
+    			TextView textView = (TextView)convertView.findViewById(R.id.title);
+    			textView.setText(navDrawerItems.get(position).getTitle());	
+    			
+    			ListView listView = (ListView) convertView.findViewById(R.id.list_slidermenu);
+    			int[] colors = {0, 0x00000000, 0}; 
+    			//listView.setDivider(new GradientDrawable(Orientation.RIGHT_LEFT, colors));
+    			
+    			ColorDrawable colorDrawable = new ColorDrawable(android.graphics.Color.WHITE ) ;
+//    			listView.setDivider( colorDrawable );
             
-    		if(position == 0 || position == 3 || position == 6){
+    		}else if( position == 3 || position == 6){
                 convertView = mInflater.inflate(R.layout.drawer_list_item_white, null);
     			ImageView imgIcon = (ImageView) convertView.findViewById(R.id.icon);
     			imgIcon.setImageResource(navDrawerItems.get(position).getIcon());
     			TextView textView = (TextView)convertView.findViewById(R.id.title);
     			textView.setText(navDrawerItems.get(position).getTitle());	
+    			
+    			ListView listView = (ListView) convertView.findViewById(R.id.list_slidermenu);
+    			int[] colors = {0, 0x00000000, 0}; 
+    			//listView.setDivider(new GradientDrawable(Orientation.RIGHT_LEFT, colors));
+    			
+    			ColorDrawable colorDrawable = new ColorDrawable(android.graphics.Color.WHITE ) ;
+//    			listView.setDivider( colorDrawable );
+    			
 
     		}else{
     			convertView = mInflater.inflate(R.layout.drawer_list_item, null);
     			TextView textView = (TextView)convertView.findViewById(R.id.title);
     			textView.setText(navDrawerItems.get(position).getTitle());	
+    			
+    			ListView listView = (ListView) convertView.findViewById(R.id.list_slidermenu);
+    			int[] colors = {0, 0xFFFFFF00, 0}; // red for the example
+    			//listView.setDivider(new GradientDrawable(Orientation.RIGHT_LEFT, colors));
+
+    			//  			listView.setDivider(new ColorDrawable(android.graphics.Color.BLACK ) );
+
     		}
 			
 			
