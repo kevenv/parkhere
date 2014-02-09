@@ -10,12 +10,14 @@
 
     <!-- Nav Drawer Menu Items -->
     <string-array name="nav_drawer_items">
-        <item >Home</item>
-        <item >Find People</item>
-        <item >Photos</item>
-        <item >Communities</item>
-        <item >Pages</item>
-        <item >What\'s Hot</item>
-    </string-array>
+        <item >Looking for a parking?</item>
+        <item >By Location</item>
+        <item >By Address</item>
+        <item >Offering a Parking?</item>
+        <item >Add/Update</item>
+        <item >Set Availability</item>
+        <item >My Account</item>
+         <item >Settings</item>
+   </string-array>
     
 </resources>

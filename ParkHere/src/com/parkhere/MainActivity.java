@@ -76,9 +76,18 @@ public class MainActivity extends FragmentActivity {
 		navDrawerItems = new ArrayList<NavDrawerItem>();
 
 		// adding nav drawer items to array
-		// Home
+		// Looking for Parking?
 		navDrawerItems.add(new NavDrawerItem(navMenuTitles[0], 1));
-
+		// By Location
+		navDrawerItems.add(new NavDrawerItem(navMenuTitles[1], -1));
+		navDrawerItems.add(new NavDrawerItem(navMenuTitles[2], -1));
+		navDrawerItems.add(new NavDrawerItem(navMenuTitles[3], 1));
+		navDrawerItems.add(new NavDrawerItem(navMenuTitles[4], -1));
+		navDrawerItems.add(new NavDrawerItem(navMenuTitles[5], -1));
+		navDrawerItems.add(new NavDrawerItem(navMenuTitles[6], 1));
+		navDrawerItems.add(new NavDrawerItem(navMenuTitles[7], -1));
+		
+		
 		mDrawerList.setOnItemClickListener(new SlideMenuClickListener());
 
 
