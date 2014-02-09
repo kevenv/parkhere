@@ -54,13 +54,22 @@ public class NavDrawerListAdapter extends BaseAdapter {
     		}
 
 		}
-		
-//        ImageView imgIcon = (ImageView) convertView.findViewById(R.id.icon);
         TextView txtTitle = (TextView) convertView.findViewById(R.id.title);
+        txtTitle.setText("test");
+
+		if(position==0){
+			ImageView imgIcon = (ImageView) convertView.findViewById(R.drawable.car);
+		}else if(position == 3){
+			ImageView imgIcon = (ImageView) convertView.findViewById(R.drawable.cat2);
+		}else if(position == 6){
+			ImageView imgIcon = (ImageView) convertView.findViewById(R.drawable.cat3);
+		}else{
+	        txtTitle.setText(navDrawerItems.get(position).getTitle());
+		}
+		
  //       TextView txtCount = (TextView) convertView.findViewById(R.id.counter);
          
    //     imgIcon.setImageResource(navDrawerItems.get(position).getIcon());        
-        txtTitle.setText(navDrawerItems.get(position).getTitle());
         
         // displaying count
         // check whether it set visible or not
