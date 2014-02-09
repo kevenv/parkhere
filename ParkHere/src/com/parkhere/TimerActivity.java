@@ -77,11 +77,18 @@ public class TimerActivity extends Fragment {
 	@Override
 	public void onResume() {
 		super.onResume();
-        LatLng position = new LatLng(45.504092,-73.619416);
+		LatLng currentPosition = new LatLng(45.50404601, -73.6208);
+		
+        LatLng position = new LatLng(45.50530926,-73.6184);
         GoogleMap map = fragment.getMap();
         map.addMarker(new MarkerOptions()
         .icon(BitmapDescriptorFactory.fromResource(R.drawable.pinsmall))
         .position(position));
+        
+        map.addMarker(new MarkerOptions()
+        .icon(BitmapDescriptorFactory.fromResource(R.drawable.smallmepin))
+        .position(currentPosition));
+        map.getUiSettings().setZoomControlsEnabled(false);
 		map.moveCamera(CameraUpdateFactory.newLatLngZoom(position, 16));
 	}
 	
