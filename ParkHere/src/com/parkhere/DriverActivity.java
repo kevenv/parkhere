@@ -1,5 +1,6 @@
 package com.parkhere;
 
+import android.content.Intent;
 import android.location.Criteria;
 import android.location.Location;
 import android.location.LocationListener;
@@ -16,9 +17,11 @@ import android.widget.RelativeLayout;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.GoogleMap.OnMarkerClickListener;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 public class DriverActivity extends FragmentActivity implements LocationListener{
@@ -37,6 +40,15 @@ public class DriverActivity extends FragmentActivity implements LocationListener
 		SupportMapFragment fm = (SupportMapFragment)  getSupportFragmentManager().findFragmentById(R.id.map);
 		map = fm.getMap(); 
         
+		map.setOnMarkerClickListener(new OnMarkerClickListener() {
+			@Override
+			public boolean onMarkerClick(Marker arg0) {
+				Intent parkingSpotIntent = new Intent(DriverActivity.this, ParkingSpotActivity.class);
+				startActivity(parkingSpotIntent);
+				return true;
+			}
+		});
+		
         //map.setMyLocationEnabled(true);
         Criteria criteria = new Criteria();
         locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
