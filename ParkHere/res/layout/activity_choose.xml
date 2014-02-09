@@ -13,7 +13,7 @@
         android:id="@+id/imageView1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="55dp"
         android:layout_marginLeft="10dp"
         android:layout_alignParentLeft="true"
     	android:layout_alignParentTop="true"
@@ -24,7 +24,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="10dp"
-	    android:layout_marginTop="250dp"
+	    android:layout_marginTop="234dp"
 	    android:layout_alignParentLeft="true"
     	android:layout_alignParentTop="true"
         android:src="@drawable/button_rent_parking" />

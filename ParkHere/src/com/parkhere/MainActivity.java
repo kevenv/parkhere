@@ -53,15 +53,15 @@ public class MainActivity extends FragmentActivity {
 
 		// adding nav drawer items to array
 		// Looking for Parking?
-		navDrawerItems.add(new NavDrawerItem(navMenuTitles[0], 1));
+		navDrawerItems.add(new NavDrawerItem(navMenuTitles[0], R.drawable.car));
 		// By Location
-		navDrawerItems.add(new NavDrawerItem(navMenuTitles[1], -1));
-		navDrawerItems.add(new NavDrawerItem(navMenuTitles[2], -1));
-		navDrawerItems.add(new NavDrawerItem(navMenuTitles[3], 1));
-		navDrawerItems.add(new NavDrawerItem(navMenuTitles[4], -1));
-		navDrawerItems.add(new NavDrawerItem(navMenuTitles[5], -1));
-		navDrawerItems.add(new NavDrawerItem(navMenuTitles[6], 1));
-		navDrawerItems.add(new NavDrawerItem(navMenuTitles[7], -1));
+		navDrawerItems.add(new NavDrawerItem(navMenuTitles[1], R.drawable.menu_item_1));
+		navDrawerItems.add(new NavDrawerItem(navMenuTitles[2], R.drawable.menu_item_2));
+		navDrawerItems.add(new NavDrawerItem(navMenuTitles[3], R.drawable.location));
+		navDrawerItems.add(new NavDrawerItem(navMenuTitles[4], R.drawable.menu_item_3));
+		navDrawerItems.add(new NavDrawerItem(navMenuTitles[5], R.drawable.menu_item_4));
+		navDrawerItems.add(new NavDrawerItem(navMenuTitles[6], R.drawable.user));
+		navDrawerItems.add(new NavDrawerItem(navMenuTitles[7], R.drawable.menu_item_5));
 		
 		
 		mDrawerList.setOnItemClickListener(new SlideMenuClickListener());
@@ -127,7 +127,7 @@ public class MainActivity extends FragmentActivity {
 	private void displayView(int position) {
 		Fragment fragment = null;
 		switch (position) {
-		case 0:
+		case 1:
 			fragment = new ChooseActivity();
 			break;
 
@@ -152,4 +152,5 @@ public class MainActivity extends FragmentActivity {
 
 	
 	}
+	
 }
