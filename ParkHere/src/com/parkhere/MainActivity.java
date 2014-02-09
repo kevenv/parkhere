@@ -2,40 +2,43 @@ package com.parkhere;
 
 import java.util.ArrayList;
 
-import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
+import android.support.v4.app.FragmentActivity;
 import android.support.v4.widget.DrawerLayout;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 
 import com.parkhere.adapter.NavDrawerListAdapter;
 import com.parkhere.model.NavDrawerItem;
 
-public class MainActivity extends Activity {
 
+
+public class MainActivity extends FragmentActivity {
 	private DrawerLayout mDrawerLayout;
 	private ListView mDrawerList;
 	private ActionBarDrawerToggle mDrawerToggle;
 
-	
+
 	// slide menu items
 	private String[] navMenuTitles;
 
 	private ArrayList<NavDrawerItem> navDrawerItems;
 	private NavDrawerListAdapter adapter;
+;
 
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-		
+
 		/*Parse.initialize(this, "rHQ443EdBXs3eySuO5Dls9wA8abPBPWTnS5CUlNe", "h4bMXEvZOwfjlCKnRrA8y8YZHhgF8OpMu57FaZDo");
 		
 		ParseObject testObject = new ParseObject("TestObject");
@@ -59,7 +62,7 @@ public class MainActivity extends Activity {
 				
 			}
 		});*/
-		
+
 		/*Intent i = new Intent(MainActivity.this, ChooseActivity.class);
         startActivity(i);
         finish();*/
@@ -75,16 +78,16 @@ public class MainActivity extends Activity {
 		// adding nav drawer items to array
 		// Home
 		navDrawerItems.add(new NavDrawerItem(navMenuTitles[0], 1));
-		
+
 		mDrawerList.setOnItemClickListener(new SlideMenuClickListener());
 
-		
+
 		// setting the nav drawer list adapter
 		adapter = new NavDrawerListAdapter(getApplicationContext(),
 				navDrawerItems);
 		mDrawerList.setAdapter(adapter);
 
-		
+
 		mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout,
 				R.drawable.burger_button, //nav menu toggle icon
 				R.string.empty, // nav drawer open - description for accessibility
@@ -112,6 +115,7 @@ public class MainActivity extends Activity {
 		getActionBar().setDisplayHomeAsUpEnabled(false);
 	}
 
+
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
@@ -123,7 +127,7 @@ public class MainActivity extends Activity {
 	 * Slide menu item click listener
 	 * */
 	private class SlideMenuClickListener implements
-			ListView.OnItemClickListener {
+			OnItemClickListener {
 		@Override
 		public void onItemClick(AdapterView<?> parent, View view, int position,
 				long id) {
@@ -147,7 +151,8 @@ public class MainActivity extends Activity {
 		}
 
 		if (fragment != null) {
-			FragmentManager fragmentManager = getFragmentManager();
+			FragmentManager fragmentManager =	getFragmentManager();
+			//FragmentManager fragmentManager = getFragmentManager();
 			fragmentManager.beginTransaction()
 					.replace(R.id.frame_container, fragment).commit();
 
@@ -160,6 +165,7 @@ public class MainActivity extends Activity {
 			// error in creating fragment
 			Log.e("MainActivity", "Error in creating fragment");
 		}
+
 
 	
 	}
