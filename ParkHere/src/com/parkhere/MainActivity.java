@@ -39,30 +39,6 @@ public class MainActivity extends FragmentActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 
-		/*Parse.initialize(this, "rHQ443EdBXs3eySuO5Dls9wA8abPBPWTnS5CUlNe", "h4bMXEvZOwfjlCKnRrA8y8YZHhgF8OpMu57FaZDo");
-		
-		ParseObject testObject = new ParseObject("TestObject");
-		testObject.put("foo", "bar");
-		testObject.saveInBackground();
-		
-		ParseQuery<ParseObject> query = ParseQuery.getQuery("GameScore");
-		query.whereEqualTo("playerName", "Dan Stemkoski");
-		query.findInBackground(new FindCallback<ParseObject>() {
-		    public void done(List<ParseObject> scoreList, ParseException e) {
-		        if (e == null) {
-		            //OK
-		        } else {
-		            //ERROR
-		        }
-		    }
-
-			@Override
-			public void done(List<ParseObject> objects, ParseException e) {
-				// TODO Auto-generated method stub
-				
-			}
-		});*/
-
 		/*Intent i = new Intent(MainActivity.this, ChooseActivity.class);
         startActivity(i);
         finish();*/
@@ -161,14 +137,12 @@ public class MainActivity extends FragmentActivity {
 
 		if (fragment != null) {
 			FragmentManager fragmentManager =	getFragmentManager();
-			//FragmentManager fragmentManager = getFragmentManager();
 			fragmentManager.beginTransaction()
 					.replace(R.id.frame_container, fragment).commit();
 
 			// update selected item and title, then close the drawer
 			mDrawerList.setItemChecked(position, true);
 			mDrawerList.setSelection(position);
-		//	setTitle(navMenuTitles[position]);
 			mDrawerLayout.closeDrawer(mDrawerList);
 		} else {
 			// error in creating fragment

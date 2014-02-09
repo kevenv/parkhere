@@ -1,34 +1,110 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="fill_parent"
-    android:layout_height="wrap_content" >
-  <LinearLayout
-      android:layout_width="fill_parent"
-      android:layout_height="wrap_content"
-      android:orientation="vertical" >
-    
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="0dp"
+    android:paddingLeft="0dp"
+    android:paddingRight="0dp"
+    android:paddingTop="0dp">
+	<ScrollView
+	    android:layout_width="fill_parent"
+	    android:layout_height="wrap_content" >
 	  <LinearLayout
-	      android:layout_width="wrap_content"
+	      android:paddingBottom="70dp"
+          android:paddingLeft="30dp"
+          android:paddingRight="0dp"
+          android:paddingTop="0dp"
+	      android:layout_width="fill_parent"
 	      android:layout_height="wrap_content"
 	      android:orientation="vertical" >
-	
-	    <ImageView
-	    android:id="@+id/parkingSpot"
-	    android:layout_width="wrap_content"
-	    android:layout_height="wrap_content"
-	    android:src="@drawable/itemview" />
+	   	  
+	   	  <TextView
+	   	      android:id="@+id/title"
+	   	      android:paddingTop="30dp"
+	   	      android:layout_width="wrap_content"
+	   	      android:layout_height="wrap_content" 
+	   	      android:fontFamily="droid-sans"
+	   	      android:textColor="#65B2E9"
+	   	      android:textSize="16pt" />
+	   	  
+	   	  <fragment
+			 android:id="@+id/map"
+			 android:layout_width="750px"
+			 android:layout_height="450px"
+			 class="com.google.android.gms.maps.SupportMapFragment"/>
+	   	  
+	   	  <TextView 
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:paddingTop="30dp"
+	        android:id="@+id/AvailabilityLabel"
+	        android:fontFamily="droid-sans"
+	   	    android:textColor="#65B2E9"
+	   	    android:textSize="16pt" 
+	   	    android:text="Availability"/>
+	   	  
+	   	  <TextView 
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:fontFamily="droid-sans"
+	   	    android:textColor="#65B2E9"
+	        android:id="@+id/availability"
+	        android:textSize="8pt" />
+	   	  
+	   	  <TextView 
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:paddingTop="30dp"
+	        android:id="@+id/PriceLabel"
+	        android:fontFamily="droid-sans"
+	   	    android:textColor="#65B2E9"
+	   	    android:textSize="16pt" 
+	   	    android:text="Price"/>
+	   	  
+	   	  <TextView 
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:fontFamily="droid-sans"
+	   	    android:textColor="#65B2E9"
+	        android:id="@+id/price"
+	        android:textSize="8pt" />
+
+	   	  <TextView 
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:paddingTop="30dp"
+	        android:id="@+id/DetailsLabel"
+	        android:fontFamily="droid-sans"
+	   	    android:textColor="#65B2E9"
+	   	    android:textSize="16pt" 
+	   	    android:text="Details"/>
+	   	  
+	   	  <TextView 
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:fontFamily="droid-sans"
+	   	    android:textColor="#65B2E9"
+	        android:id="@+id/details"
+	        android:textSize="8pt" />
+	   	  	     
+	   	  <ImageView
+	   	    android:paddingTop="30dp"
+		    android:id="@+id/picture"
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content" />
+	      
 	  </LinearLayout>
-	    <LinearLayout
-	      android:layout_width="wrap_content"
-	      android:layout_height="wrap_content"
-	      android:orientation="vertical" >
-	
-	   <ImageView
-	    android:id="@+id/parkingSpotImage"
-	    android:layout_width="wrap_content"
-	    android:layout_height="wrap_content"
-	    android:src="@drawable/itemview" />
-	  </LinearLayout>
-  </LinearLayout>
-      
-</ScrollView>
+	      
+	</ScrollView>
+
+   <ImageView
+    android:id="@+id/bookItButton"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_alignParentLeft="true"
+       android:layout_alignParentTop="true"
+       android:layout_marginLeft="0dp"
+       android:layout_marginTop="760dp"
+    android:src="@drawable/bookit" />
+</RelativeLayout>
