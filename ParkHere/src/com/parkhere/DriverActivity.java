@@ -40,6 +40,7 @@ public class DriverActivity extends Fragment implements LocationListener, IConsu
 	private ParseConnector parseConnector;
 	private LatLng currentPosition;
 	private View rootView;
+	private MapFragment fm;
 
 
 	@Override
@@ -48,7 +49,7 @@ public class DriverActivity extends Fragment implements LocationListener, IConsu
 		rootView = inflater.inflate(R.layout.activity_driver, container, false);
 		
 		// Get a handle to the Map Fragment
-		MapFragment fm = (MapFragment)  getFragmentManager().findFragmentById(R.id.map);
+		fm = (MapFragment)  getFragmentManager().findFragmentById(R.id.map);
 		map = fm.getMap(); 
         map.getUiSettings().setZoomControlsEnabled(false);
 		
@@ -80,7 +81,9 @@ public class DriverActivity extends Fragment implements LocationListener, IConsu
 			public void onInfoWindowClick(Marker marker) {
 				ParkingSpotActivity parkingSpotActivity = new ParkingSpotActivity();
 				parkingSpotActivity.setObjectId(marker.getTitle());
-				getFragmentManager().beginTransaction().replace(R.id.frame_container, parkingSpotActivity).addToBackStack("post").commit();
+				getFragmentManager().beginTransaction()
+				.remove(fm)
+				.replace(R.id.frame_container, parkingSpotActivity).addToBackStack("post").commit();
 			}
 		});
 		

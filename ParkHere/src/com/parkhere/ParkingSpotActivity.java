@@ -29,6 +29,7 @@ public class ParkingSpotActivity extends Fragment implements IConsumeParkingLots
 	private GoogleMap map;
 	private View rootView;
 	private String objectId;
+	private MapFragment fm;
     
 	public void setObjectId(String objectId) {
 		this.objectId = objectId;
@@ -46,7 +47,7 @@ public class ParkingSpotActivity extends Fragment implements IConsumeParkingLots
 		bookItButton.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				getFragmentManager().beginTransaction().detach(ParkingSpotActivity.this).commit();
+				getFragmentManager().beginTransaction().remove(ParkingSpotActivity.this).commit();
 			}
 		});
 		return rootView;
@@ -79,7 +80,7 @@ public class ParkingSpotActivity extends Fragment implements IConsumeParkingLots
 		Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length); 
 		picture.setImageBitmap(decodedByte);
 		
-		MapFragment fm = (MapFragment)  getFragmentManager().findFragmentById(R.id.map_detail);
+		fm = (MapFragment)  getFragmentManager().findFragmentById(R.id.map_detail);
 		map = fm.getMap();
 		map.getUiSettings().setZoomControlsEnabled(false);
 		map.getUiSettings().setZoomGesturesEnabled(false);
