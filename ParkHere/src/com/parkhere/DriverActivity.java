@@ -4,14 +4,12 @@ import java.util.List;
 
 import android.app.Activity;
 import android.app.Fragment;
-import android.content.Intent;
 import android.location.Criteria;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.view.LayoutInflater;
-import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
@@ -82,7 +80,7 @@ public class DriverActivity extends Fragment implements LocationListener, IConsu
 			public void onInfoWindowClick(Marker marker) {
 				ParkingSpotActivity parkingSpotActivity = new ParkingSpotActivity();
 				parkingSpotActivity.setObjectId(marker.getTitle());
-				getFragmentManager().beginTransaction().replace(R.id.frame_container, parkingSpotActivity).commit();
+				getFragmentManager().beginTransaction().replace(R.id.frame_container, parkingSpotActivity).addToBackStack("post").commit();
 			}
 		});
 		
@@ -107,9 +105,10 @@ public class DriverActivity extends Fragment implements LocationListener, IConsu
         parseConnector.getParkingLocations(this, null);
 		return rootView;
 	}
+	
+	
 	//#dont try this at home
 	public void manageShowAvailability() {
-		final boolean menuIsOpen = false;;
 		ImageView selector = (ImageView) rootView.findViewById(R.id.selector);
 		final ImageView menuOpen = (ImageView) rootView.findViewById(R.id.selector_menu_open);
 		final ImageView selectedOption = (ImageView) rootView.findViewById(R.id.selector_selected);

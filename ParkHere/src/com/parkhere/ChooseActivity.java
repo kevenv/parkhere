@@ -42,7 +42,7 @@ public class ChooseActivity extends Fragment {
         
 		img.setOnClickListener(new OnClickListener() {
 		    public void onClick(View v) {
-		    	getFragmentManager().beginTransaction().replace(R.id.frame_container ,new DriverActivity()).commit();
+		    	getFragmentManager().beginTransaction().replace(R.id.frame_container ,new DriverActivity()).addToBackStack( "driver" ).commit();
 		    }
 		});
 		

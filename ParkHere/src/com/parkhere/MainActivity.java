@@ -2,25 +2,31 @@ package com.parkhere;
 
 import java.util.ArrayList;
 
+import android.app.ActionBar;
+import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
+import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
-import android.support.v4.app.FragmentActivity;
 import android.support.v4.widget.DrawerLayout;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.ImageView;
 import android.widget.ListView;
 
+import com.google.android.gms.internal.ac;
 import com.parkhere.adapter.NavDrawerListAdapter;
 import com.parkhere.model.NavDrawerItem;
 
 
 
-public class MainActivity extends FragmentActivity {
+public class MainActivity extends Activity {
 	private DrawerLayout mDrawerLayout;
 	private ListView mDrawerList;
 	private ActionBarDrawerToggle mDrawerToggle;
@@ -31,7 +37,6 @@ public class MainActivity extends FragmentActivity {
 
 	private ArrayList<NavDrawerItem> navDrawerItems;
 	private NavDrawerListAdapter adapter;
-;
 
 	
 	@Override
@@ -69,36 +74,57 @@ public class MainActivity extends FragmentActivity {
 		mDrawerList.setAdapter(adapter);
 
 
-		mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout,
-				R.drawable.burger_button, //nav menu toggle icon
-				R.string.empty, // nav drawer open - description for accessibility
-				R.string.empty // nav drawer close - description for accessibility
-		) {
-			public void onDrawerClosed(View view) {
-				// calling onPrepareOptionsMenu() to show action bar icons
-				invalidateOptionsMenu();
-			}
+		mDrawerToggle = new ActionBarDrawerToggle(
+                this,                  /* host Activity */
+                mDrawerLayout,         /* DrawerLayout object */
+                R.drawable.burger_button,  /* nav drawer icon to replace 'Up' caret */
+                R.string.empty,  /* "open drawer" description */
+                R.string.empty  /* "close drawer" description */
+                ) {
 
-			public void onDrawerOpened(View drawerView) {
-			//	getActionBar().setTitle(mDrawerTitle);
-				// calling onPrepareOptionsMenu() to hide action bar icons
-				invalidateOptionsMenu();
-			}
-		};
-		mDrawerLayout.setDrawerListener(mDrawerToggle);
-		// enabling action bar app icon and behaving it as toggle button
-		getActionBar().setDisplayHomeAsUpEnabled(true);
-		getActionBar().setHomeButtonEnabled(true);
-		getActionBar().setBackgroundDrawable(getResources().getDrawable(R.drawable.navigationbar) );
-		getActionBar().setIcon(R.drawable.logo);
-		getActionBar().setDisplayShowTitleEnabled(false);
-		getActionBar().setDisplayShowHomeEnabled(true);
-		getActionBar().setDisplayHomeAsUpEnabled(false);
+            /** Called when a drawer has settled in a completely closed state. */
+            public void onDrawerClosed(View view) {
+                super.onDrawerClosed(view);
+            }
+
+            /** Called when a drawer has settled in a completely open state. */
+            public void onDrawerOpened(View drawerView) {
+                super.onDrawerOpened(drawerView);
+            }
+        };
+        
+        ActionBar actionBar = getActionBar();
+        //try to remove the green icon
+        //actionBar.setDisplayGreenShit(false);
+        getActionBar().setBackgroundDrawable(getResources().getDrawable(R.drawable.navigationbar) );
+        actionBar.setIcon(R.drawable.fuckinblue);
+        actionBar.setDisplayHomeAsUpEnabled(false);
+        actionBar.setDisplayUseLogoEnabled(false);
+        actionBar.setDisplayHomeAsUpEnabled(false);
+        actionBar.setDisplayShowCustomEnabled(true);
+        actionBar.setDisplayShowTitleEnabled(false);
+
+        LayoutInflater inflator = (LayoutInflater) this .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        View v = inflator.inflate(R.layout.action_bar_title, null);
+        ImageView burgerIcon = (ImageView)v.findViewById(R.id.burgerIcon);
+        burgerIcon.setImageResource(R.drawable.logo);
+
+        actionBar.setCustomView(v);
+        
+        // Set the drawer toggle as the DrawerListener
+        mDrawerLayout.setDrawerListener(mDrawerToggle);
 		
-		getFragmentManager().beginTransaction().replace(R.id.frame_container, new ChooseActivity()).commit();
+		getFragmentManager().beginTransaction().replace(R.id.frame_container, new ChooseActivity()).addToBackStack( "choose" ).commit();
 	}
 
+    @Override
+    protected void onPostCreate(Bundle savedInstanceState) {
+        super.onPostCreate(savedInstanceState);
+        // Sync the toggle state after onRestoreInstanceState has occurred.
+        mDrawerToggle.syncState();
+    }
 
+	
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
@@ -136,7 +162,7 @@ public class MainActivity extends FragmentActivity {
 		if (fragment != null) {
 			FragmentManager fragmentManager =	getFragmentManager();
 			fragmentManager.beginTransaction()
-					.replace(R.id.frame_container, fragment).commit();
+					.replace(R.id.frame_container, fragment).addToBackStack( "choose2" ).commit();
 
 			// update selected item and title, then close the drawer
 			mDrawerList.setItemChecked(position, true);
