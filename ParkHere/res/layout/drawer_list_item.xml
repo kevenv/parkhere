@@ -5,15 +5,6 @@
     android:background="@color/menu_background"
      
    >
-    <ImageView
-        android:id="@+id/icon"
-        android:layout_width="25dp"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_marginLeft="12dp"
-        android:layout_marginRight="12dp"
-        android:layout_centerVertical="true" />
-
 
     <TextView
         android:id="@+id/title"
@@ -25,16 +16,6 @@
         android:gravity="center_vertical"
         android:paddingRight="40dp"/>
     
-    <TextView
-        android:id="@+id/header"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:minHeight="?android:attr/listPreferredItemHeightSmall"
-        android:textAppearance="?android:attr/textAppearanceListItemSmall"
-        android:textColor="@color/menu_background"
-        android:background="@color/white"
-        android:gravity="center_vertical"
-        android:paddingRight="40dp"/>
     
 
 </RelativeLayout>
