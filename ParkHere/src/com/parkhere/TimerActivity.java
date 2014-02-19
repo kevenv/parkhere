@@ -157,8 +157,6 @@ public class TimerActivity extends Fragment {
 								
 								@Override
 								public void onSuccess(Token token) {
-									Toast.makeText(getActivity().getApplicationContext(), "Success", 3000).show();
-									
 									new Handler().postDelayed(new Runnable() {
 							            @Override
 							            public void run() {
@@ -167,7 +165,7 @@ public class TimerActivity extends Fragment {
 											.replace(R.id.frame_container, new SuccessActivity())
 											.commit();
 							            }
-							        }, 3000);
+							        }, 0);
 								}
 								
 								@Override

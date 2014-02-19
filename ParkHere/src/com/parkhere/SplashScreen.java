@@ -1,5 +1,7 @@
 package com.parkhere;
 
+import com.parkhere.main.MainActivity;
+
 import android.os.Bundle;
 import android.os.Handler;
 import android.app.Activity;
@@ -9,7 +11,7 @@ import android.view.Menu;
 public class SplashScreen extends Activity {
 
 	// Splash screen timer
-    private static int SPLASH_TIME_OUT = 3000;
+    private static int SPLASH_TIME_OUT = 0;
     
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
