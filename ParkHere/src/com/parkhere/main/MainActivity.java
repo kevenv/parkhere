@@ -58,7 +58,8 @@ public class MainActivity extends FragmentActivity implements ISwitchFragments{
 
 	private void configureDrawerMenu() {
 		mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
-        mDrawerLayout.setDrawerShadow(R.drawable.drawer_shadow, GravityCompat.START);
+		//TODO: Set a Drawer Shadow
+        //mDrawerLayout.setDrawerShadow(R.drawable., GravityCompat.START);
         
         getActionBar().setHomeButtonEnabled(true);
         getActionBar().setIcon(R.drawable.burger_button);

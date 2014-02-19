@@ -9,12 +9,7 @@ import android.view.ViewGroup;
 
 import com.parkhere.payment.ErrorDialogFragment;
 import com.parkhere.payment.PaymentForm;
-import com.parkhere.payment.ProgressDialogFragment;
 import com.parkhere.payment.TokenList;
-import com.stripe.android.Stripe;
-import com.stripe.android.TokenCallback;
-import com.stripe.android.model.Card;
-import com.stripe.android.model.Token;
 
 public class PaymentFragment extends Fragment {
 
